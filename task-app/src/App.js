@@ -41,13 +41,10 @@ export class App extends Component {
         number: prev.task.number + 1,
       },
     }));
-
-    // this.setState((prev) => ({
-    //   number: prev.number + 1,
-    // }));
   }
 
   render() {
+    // console.log(this.state.taskArray);
     return (
       <div className="App">
         <form className="form" onSubmit={this.submitHandler}>
