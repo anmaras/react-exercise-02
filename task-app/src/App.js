@@ -3,6 +3,8 @@ import Overview from './Components/Overview';
 import './App.css';
 
 export class App extends Component {
+  taskArray = [];
+
   constructor(props) {
     super(props);
 
@@ -26,9 +28,15 @@ export class App extends Component {
     });
   }
 
+  populateTaskArray(input) {
+    this.taskArray.push({ title: input, id: Math.random() });
+  }
+
   submitHandler(e) {
     e.preventDefault();
     this.clearInput();
+    this.populateTaskArray(this.state.userInput);
+    console.log(this.taskArray);
   }
 
   render() {
@@ -45,7 +53,7 @@ export class App extends Component {
           </div>
           <button type="submit">Submit</button>
         </form>
-        <Overview />
+        <Overview taskArray={this.taskArray} />
       </div>
     );
   }
