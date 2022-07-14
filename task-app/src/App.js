@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import Overview from './Components/Overview';
+import uniqid from 'uniqid';
 import './App.css';
 
 export class App extends Component {
-  taskArray = [];
-
   constructor(props) {
     super(props);
 
     this.state = {
-      userInput: '',
+      task: {
+        title: '',
+        id: uniqid(),
+      },
+
+      taskArray: [],
     };
 
     this.userInputHandler = this.userInputHandler.bind(this);
@@ -18,25 +22,22 @@ export class App extends Component {
 
   userInputHandler(e) {
     this.setState({
-      userInput: e.target.value,
+      task: {
+        title: e.target.value,
+        id: this.state.task.id,
+      },
     });
-  }
-
-  clearInput() {
-    this.setState({
-      userInput: '',
-    });
-  }
-
-  populateTaskArray(input) {
-    this.taskArray.push({ title: input, id: Math.random() });
   }
 
   submitHandler(e) {
     e.preventDefault();
-    this.clearInput();
-    this.populateTaskArray(this.state.userInput);
-    console.log(this.taskArray);
+    this.setState({
+      taskArray: this.state.taskArray.concat(this.state.task),
+      task: {
+        title: '',
+        id: uniqid(),
+      },
+    });
   }
 
   render() {
@@ -53,7 +54,7 @@ export class App extends Component {
           </div>
           <button type="submit">Submit</button>
         </form>
-        <Overview taskArray={this.taskArray} />
+        <Overview taskArray={this.state.taskArray} />
       </div>
     );
   }

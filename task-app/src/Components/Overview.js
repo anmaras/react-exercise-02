@@ -5,6 +5,7 @@ import './Overview.css';
 class Overview extends Component {
   render() {
     const { taskArray } = this.props;
+
     const taskList = taskArray.map((arr) => (
       <OverviewItem text={arr.title} key={arr.id} />
     ));
