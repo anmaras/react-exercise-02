@@ -12,10 +12,12 @@ li {
 }
 
 .items {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row-reverse;
   background-color: #282c34;
 
   box-shadow: 0px 0px 30px rgb(32, 32, 32);
 
   padding: 1rem;
-  text-align: center;
 }

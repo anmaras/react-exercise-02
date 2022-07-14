@@ -11,6 +11,7 @@ export class App extends Component {
       task: {
         title: '',
         id: uniqid(),
+        number: 0,
       },
 
       taskArray: [],
@@ -25,19 +26,25 @@ export class App extends Component {
       task: {
         title: e.target.value,
         id: this.state.task.id,
+        number: this.state.task.number,
       },
     });
   }
 
   submitHandler(e) {
     e.preventDefault();
-    this.setState({
+    this.setState((prev) => ({
       taskArray: this.state.taskArray.concat(this.state.task),
       task: {
         title: '',
         id: uniqid(),
+        number: prev.task.number + 1,
       },
-    });
+    }));
+
+    // this.setState((prev) => ({
+    //   number: prev.number + 1,
+    // }));
   }
 
   render() {
@@ -48,7 +55,7 @@ export class App extends Component {
             <label>UserInput</label>
             <input
               name="userInput"
-              value={this.state.userInput}
+              value={this.state.task.title}
               onChange={this.userInputHandler}
             ></input>
           </div>

@@ -7,7 +7,7 @@ class Overview extends Component {
     const { taskArray } = this.props;
 
     const taskList = taskArray.map((arr) => (
-      <OverviewItem text={arr.title} key={arr.id} />
+      <OverviewItem text={arr.title} key={arr.id} number={arr.number} />
     ));
 
     return <ul className="overview">{taskList}</ul>;
