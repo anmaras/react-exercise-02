@@ -19,6 +19,8 @@ export class App extends Component {
 
     this.userInputHandler = this.userInputHandler.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
+    this.objectKey = this.objectKey.bind(this);
+    this.deleteItemList = this.deleteItemList.bind(this);
   }
 
   userInputHandler(e) {
@@ -34,7 +36,7 @@ export class App extends Component {
   submitHandler(e) {
     e.preventDefault();
     this.setState((prev) => ({
-      taskArray: this.state.taskArray.concat(this.state.task),
+      taskArray: prev.taskArray.concat(this.state.task),
       task: {
         title: '',
         id: uniqid(),
@@ -43,8 +45,15 @@ export class App extends Component {
     }));
   }
 
+  objectKey(data) {
+    this.setState({
+      taskArray: this.state.taskArray.filter((item) => item.id !== data),
+    });
+  }
+
+  deleteItemList() {}
+
   render() {
-    // console.log(this.state.taskArray);
     return (
       <div className="App">
         <form className="form" onSubmit={this.submitHandler}>
@@ -58,7 +67,7 @@ export class App extends Component {
           </div>
           <button type="submit">Submit</button>
         </form>
-        <Overview taskArray={this.state.taskArray} />
+        <Overview taskArray={this.state.taskArray} objectKey={this.objectKey} />
       </div>
     );
   }
